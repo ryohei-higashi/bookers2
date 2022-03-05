@@ -1,0 +1,26 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+header span {
+  font-size: 20px;
+}
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+}
+
+header {
+  color: white;
+}
+
+.nav-item {
+    color: white ;
+}
+
+footer {
+  text-align: center;
+}

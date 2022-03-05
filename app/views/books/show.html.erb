@@ -1,0 +1,75 @@
+<!--投稿詳細-->
+
+<div class="body">
+  <div class="container px-5 px-sm-0">
+
+    <!--サクセスメッセージ-->
+    <p id="notice">
+      <%= notice %>
+    </p>
+
+    <!--コメントエラーメッセージ-->
+    <div class="error">
+      <% if @book.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</h2>
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <!--サイドバー-->
+    <div class="row">
+      <div class="col-md-3">
+        <%= render 'users/userinfo', user: @user %> <!--User infoの部分テンプレート-->
+        <%= render 'books/newbook', book: @book_new %> <!--New bookの部分テンプレート-->
+      </div>
+
+      <!--投稿詳細-->
+      <div class="col-md-8 offset-md-1">
+
+        <h2>Book detail</h2>
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <tr>
+              <td>
+              <%= link_to user_path(@user.id) do %>
+                <% if @user.profile_image.attached? %>
+                  <%= image_tag @user.profile_image, size: "40x40" %>
+                <% else %>
+                  <%= image_tag 'no_image', size: "40x40" %>
+                <% end %>
+                <br>
+                <%= @user.name %>
+              <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(@book.id) do %>
+                  <%= @book.title %>
+                <% end %>
+              </td>
+              <td>
+                  <%= @book.body %>
+              </td>
+               <td>
+                 <% if @book.user == current_user %>
+                  <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %>
+                <% end %>
+              </td>
+               <td>
+                  <% if @book.user == current_user %>
+                    <%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %>
+                  <% end %>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
